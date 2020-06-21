@@ -1,10 +1,7 @@
 import fisica.*;
 FWorld world;
-
+int toSpawnOnClick = 50;
 ArrayList<player> players = new ArrayList<player>();
-ArrayList<gunType> typesOfGun = new ArrayList<gunType>();
-ArrayList<gun> guns = new ArrayList<gun>();
-ArrayList<damageEffect> effects = new ArrayList<damageEffect>();
 
 void setup() {
   size(800,600);
@@ -23,22 +20,8 @@ void draw() {
   text(players.size(), 20, 40);
   world.step();
   world.draw();
-  allDamageEffects();
-  displayWeapons();
   runAllPlayers();
 
-}
-
-void allDamageEffects() {
-  for(int i = effects.size()-1; i >= 0; i--) {
-    effects.get(i).run();
-  }
-}
-
-void displayWeapons() {
-  for(int i = guns.size()-1; i >= 0; i--) {
-    guns.get(i).run();
-  }
 }
 
 void runAllPlayers() {
@@ -48,7 +31,7 @@ void runAllPlayers() {
 }
 
 void mousePressed() {
-  gunType pistol = new gunType(1, 5, new PVector(0,0), 30);
+  for(int i = 0; i < toSpawnOnClick; i++){
   players.add(new player(new PVector(mouseX, mouseY), new PVector(random(255), random(255), random(255))));
-  guns.add(new gun(pistol, new PVector(mouseX, mouseY)));
+  }
 }
